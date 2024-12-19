@@ -10,14 +10,43 @@ AUTH0_CLIENT_ID = "NnioCmlbjs3JtPrRxcEIgDeJPEzQNnV0"
 AUTH0_CLIENT_SECRET = "wqdZ2bMXg-qhMrqRGGkm4YeOkfWE2crkT63G38xV-oHVyQlzespHuVJqvOZ54Hq7"
 AUTH0_CALLBACK_URL = "https://obscure-broccoli-94v5977r4rwcpq4p-8501.app.github.dev/"  # Replace with your deployment URL
 
-# Initialize login button
-user_info = login_button(
-    client_id=AUTH0_CLIENT_ID,
-    domain=AUTH0_DOMAIN
-)
-print(user_info)
+# Initialize session state for authentication
+if "auth_state" not in st.session_state:
+    st.session_state["auth_state"] = "loading"  # Initial state
 
-if user_info:
+# Function to check authentication and update session state
+def check_auth():
+    user_info = login_button(
+        client_id=AUTH0_CLIENT_ID,
+        domain=AUTH0_DOMAIN
+    )
+    print(user_info)
+    if user_info:
+        st.session_state["auth_state"] = "authenticated"
+        st.session_state["user_info"] = user_info
+    else:
+        st.session_state["auth_state"] = "unauthenticated"
+
+# Call the authentication check
+check_auth()
+# Initialize login button
+# Show loading spinner while fetching user info
+
+# with st.spinner("Fetching user information..."):
+#    user_info = login_button(
+#        client_id=AUTH0_CLIENT_ID,
+#        domain=AUTH0_DOMAIN
+#   )
+
+if st.session_state["auth_state"] == "loading":
+    with st.spinner("Loading... Please wait."):
+        pass
+
+
+elif st.session_state["auth_state"] == "authenticated":
+    user_info = st.session_state["user_info"]
+    st.success(f"Logged in as: {user_info['email']}")  # Adjust based on what `user_info` contains
+    st.write("Welcome to the app! You are authenticated.")
     # Show authenticated content
 # Show title and description.
     st.title("📄 Document question answering")
@@ -75,4 +104,4 @@ if user_info:
             st.write(f'<a href="{logout_url}" target="_self">Click here to logout</a>', unsafe_allow_html=True)
 
 else:
-    st.info("Please log in to access the application.")
+    st.info("Please log in to access the application..")
