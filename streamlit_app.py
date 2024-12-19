@@ -5,7 +5,6 @@ from streamlit_auth0 import login_button
 # Auth0 configuration
 AUTH0_DOMAIN = "curiflow-dev.us.auth0.com"
 AUTH0_CLIENT_ID = "NnioCmlbjs3JtPrRxcEIgDeJPEzQNnV0"
-AUTH0_CLIENT_SECRET = "wqdZ2bMXg-qhMrqRGGkm4YeOkfWE2crkT63G38xV-oHVyQlzespHuVJqvOZ54Hq7"
 AUTH0_CALLBACK_URL = "https://obscure-broccoli-94v5977r4rwcpq4p-8501.app.github.dev/"  # Replace with your deployment URL
 
 # Initialize login button
