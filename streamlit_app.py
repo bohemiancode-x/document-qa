@@ -1,7 +1,5 @@
 import streamlit as st
 from openai import OpenAI
-from auth0.authentication import GetToken
-from auth0.management import Auth0
 from streamlit_auth0 import login_button
 
 # Auth0 configuration
