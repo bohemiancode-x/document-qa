@@ -1,2 +1,4 @@
 streamlit
 openai
+streamlit-auth0
+auth0-python==3.24.1
