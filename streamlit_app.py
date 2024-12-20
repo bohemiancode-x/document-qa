@@ -53,7 +53,7 @@ def logout_button():
     st.markdown(
         f"""
         <div class="center-container">
-            <a href="{logout_url}" class="logout-button">Logout</a>
+            <a href="{logout_url}" target="_self" class="logout-button">Logout</a>
         </div>
         """,
         unsafe_allow_html=True,
